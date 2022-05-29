@@ -34,6 +34,7 @@ class Field extends ElementBuilder
 
         if ($label instanceof Model) {
             $this->item['label'] = $label->attributeLabel($name);
+            $this->item['options']['value'] = $label->{$name} ?? null;
         }
 
         if ($elements) {
@@ -62,6 +63,13 @@ class Field extends ElementBuilder
     public function editor(array $args = [])
     {
         $this->item['type'] = 'editor';
+
+        $this->elements[$this->elementIndex] = $this->item;
+    }
+
+    public function select(array $args = [])
+    {
+        $this->item['type'] = 'select';
 
         $this->elements[$this->elementIndex] = $this->item;
     }

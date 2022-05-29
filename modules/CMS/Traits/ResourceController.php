@@ -106,23 +106,13 @@ trait ResourceController
         $model = $this->makeModel(...$indexParams)->findOrFail($this->getPathId($params));
         $this->checkPermission('edit', $model, ...$params);
 
-        return Inertia::render(
-            'PageBuilder',
+        $builder = $this->formPageBuilder($model);
+
+        return $builder->render(
             array_merge(
                 [
                     'title' => $model->{$model->getFieldName()},
                     'linkIndex' => action([static::class, 'index'], $indexParams),
-                    'fields' => [
-                        [
-                            'type' => 'text',
-                            'label' => trans('cms::app.title'),
-                            'value' => $model->name,
-                        ],
-                        [
-                            'type' => 'textarea',
-                            'value' => $model->email,
-                        ]
-                    ],
                 ],
                 $this->getDataForForm($model, ...$params)
             )
@@ -245,6 +235,7 @@ trait ResourceController
 
                     if (is_array($column['formatter']) && $column['formatter'][1] == 'rowActionsFormatter') {
                         $results[$index]['action_column'] = $col;
+                        $results[$index]['edit_url'] = $table->currentUrl .'/'. $row->id . '/edit';
                         $results[$index]['actions'] = $table->rowAction($row);
                     }
                 } else {
@@ -479,7 +470,11 @@ trait ResourceController
 
                 $row->addCol4(
                     function (Col $col) use ($model) {
-                        $col->addField($model, 'title')->textInput();
+                        $col->addField($model, 'status')->select(
+                            [
+                                'options' => $model->getStatuses(),
+                            ]
+                        );
                         $col->addField($model, 'name')->textInput();
                     }
                 );

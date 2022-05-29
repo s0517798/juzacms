@@ -12,6 +12,7 @@ export const addScriptJS = (src, sync = 0, cdn = 0) => {
     } else {
       script.async = true;
     }
+
     return document.body.appendChild(script);
 };
 
@@ -21,4 +22,12 @@ export const __ = (key) => {
 
 export const asset = (src) => {
     return '/' + src;
+}
+
+export function baseUrl(path = '') {
+    if (path) {
+        return location.origin +'/'+ path.trimStart("/");
+    }
+
+    return location.origin;
 }

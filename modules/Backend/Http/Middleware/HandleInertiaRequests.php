@@ -67,6 +67,7 @@ class HandleInertiaRequests extends Middleware
                 },
                 'adminPrefix' => $adminPrefix,
                 'adminUrl' => $adminUrl,
+                'baseUrl' => url('/'),
                 'menuItems' => $menuItems,
             ]
         );

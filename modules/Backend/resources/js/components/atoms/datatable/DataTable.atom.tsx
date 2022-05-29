@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from 'react';
-import cx from 'classnames';
 import {__} from '../../../utils/common';
 import {JW_DataTableProps, JW_DataTableAction} from ".";
 import axios from "axios";
@@ -20,7 +19,7 @@ export const JW_DataTable = ({data = {
             .then(res => {
                 setItem(res.data)
             });
-    })
+    }, [])
 
     let hanldSubmitAction = function (event) {
         alert('aa');
