@@ -3,7 +3,7 @@ import cx from 'classnames';
 import {__} from '../../../utils/common';
 import {JW_DataTableProps, JW_DataTableAction} from ".";
 import axios from "axios";
-import Parser from 'html-react-parser';
+import {JW_DataTableRowItem} from "./RowItem.atom";
 
 export const JW_DataTable = ({data = {
     uniqueId: '',
@@ -20,7 +20,7 @@ export const JW_DataTable = ({data = {
             .then(res => {
                 setItem(res.data)
             });
-    }, [])
+    })
 
     let hanldSubmitAction = function (event) {
         alert('aa');
@@ -71,16 +71,16 @@ export const JW_DataTable = ({data = {
                                 <input type="checkbox" className='check-all' />
                             </th>
                             {
-                                data?.columns.map((item, index) => {
+                                data?.columns.map((col, index) => {
                                     return (
                                         <React.Fragment key={index}>
                                             <th
-                                                style={{width: item.width}}
-                                                align={item.align || 'left'}
-                                                data-field={item.key}
-                                                data-sortable={item.sortable || true}
+                                                style={{width: col.width}}
+                                                align={col.align || 'left'}
+                                                data-field={col.key}
+                                                data-sortable={col.sortable || true}
                                             >
-                                                {item.label || item.key.upperCase}
+                                                {col.label || col.key.upperCase}
                                             </th>
                                         </React.Fragment>
                                     )
@@ -97,12 +97,10 @@ export const JW_DataTable = ({data = {
                                     <tr>
                                         <td><input type="checkbox" value={row.id} /></td>
                                         {
-                                            data?.columns.map((item, colIndex) => {
+                                            data?.columns.map((col, colIndex) => {
                                                 return (
                                                     <React.Fragment key={colIndex}>
-                                                        <td>
-                                                            {Parser(row[item.key])}
-                                                        </td>
+                                                        <JW_DataTableRowItem col={col} row={row} />
                                                     </React.Fragment>
                                                 )
                                             })

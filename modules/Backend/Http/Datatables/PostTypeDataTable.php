@@ -189,12 +189,15 @@ class PostTypeDataTable extends DataTable
 
     public function rowActionsFormatter($value, $row, $index)
     {
-        return view('cms::backend.items.datatable_item', [
-            'value' => $row->{$row->getFieldName()},
-            'row' => $row,
-            'actions' => $this->rowAction($row),
-            'editUrl' => $this->currentUrl .'/'. $row->id . '/edit',
-        ])
+        return view(
+            'cms::backend.items.datatable_item',
+            [
+                'value' => $row->{$row->getFieldName()},
+                'row' => $row,
+                'actions' => $this->rowAction($row),
+                'editUrl' => $this->currentUrl .'/'. $row->id . '/edit',
+            ]
+        )
             ->render();
     }
 

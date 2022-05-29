@@ -163,7 +163,10 @@ abstract class DataTable
 
         $columns = $this->columns();
         foreach ($columns as $index => $col) {
-            unset($col['formatter']);
+            if (isset($col['formatter'])) {
+                unset($col['formatter']);
+            }
+
             $col['key'] = $index;
             $columns[$index] = $col;
         }

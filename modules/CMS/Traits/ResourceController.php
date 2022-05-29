@@ -233,13 +233,20 @@ trait ResourceController
 
         foreach ($rows as $index => $row) {
             $columns['id'] = $row->id;
+
             foreach ($columns as $col => $column) {
+                $results[$index]['origin_value'][$col] = $row->{$col};
                 if (!empty($column['formatter'])) {
                     $results[$index][$col] = $column['formatter'](
                         $row->{$col} ?? null,
                         $row,
                         $index
                     );
+
+                    if (is_array($column['formatter']) && $column['formatter'][1] == 'rowActionsFormatter') {
+                        $results[$index]['action_column'] = $col;
+                        $results[$index]['actions'] = $table->rowAction($row);
+                    }
                 } else {
                     $results[$index][$col] = $row->{$col};
                 }
