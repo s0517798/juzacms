@@ -6,6 +6,7 @@ import {JW_Form} from "../form";
 import {JW_TextArea} from "../textArea";
 import {JW_Card} from "../card";
 import {JW_Editor} from "../editor";
+import {JW_DataTable} from "../datatable";
 
 export const JW_Field = ({fields = []}) => {
   return (
@@ -70,6 +71,14 @@ export const JW_Field = ({fields = []}) => {
                                     key={index}
                                     label={item.label}
                                     name={item.name}
+                                    options={item.options}
+                                />
+                            )
+                        case 'datatable':
+                            return (
+                                <JW_DataTable
+                                    key={index}
+                                    data={item.data}
                                     options={item.options}
                                 />
                             )

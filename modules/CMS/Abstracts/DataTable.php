@@ -153,6 +153,37 @@ abstract class DataTable
         $this->currentUrl = $url;
     }
 
+    public function toArray(): array
+    {
+        $uniqueId = 'juzaweb_' . Str::random(10);
+        //$searchFields = $this->searchFields();
+        if (empty($this->currentUrl)) {
+            $this->currentUrl = url()->current();
+        }
+
+        $columns = $this->columns();
+        foreach ($columns as $index => $col) {
+            unset($col['formatter']);
+            $col['key'] = $index;
+            $columns[$index] = $col;
+        }
+
+        return [
+            'columns' => array_values($columns),
+            'actions' => $this->actions(),
+            'uniqueId' => $uniqueId,
+            //'params' => $this->params,
+            //'searchFields' => $searchFields,
+            'perPage' => $this->perPage,
+            'sortName' => $this->sortName,
+            'sortOder' => $this->sortOder,
+            'dataUrl' => $this->dataUrl,
+            //'actionUrl' => $this->actionUrl,
+            //'searchFieldTypes' => $this->getSearchFieldTypes(),
+            'table' => Crypt::encryptString(static::class),
+        ];
+    }
+
     private function paramsToArray($params)
     {
         foreach ($params as $key => $var) {

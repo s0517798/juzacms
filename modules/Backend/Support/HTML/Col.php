@@ -32,4 +32,13 @@ class Col extends ElementBuilder
 
         return $this;
     }
+
+    public function addDataTable($dataTable): static
+    {
+        $table = new DataTable($dataTable);
+
+        $this->item['children'][] = $table->toArray();
+
+        return $this;
+    }
 }

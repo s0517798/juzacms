@@ -13,4 +13,12 @@ export const addScriptJS = (src, sync = 0, cdn = 0) => {
       script.async = true;
     }
     return document.body.appendChild(script);
-  };
+};
+
+export const __ = (key) => {
+    return key;
+}
+
+export const asset = (src) => {
+    return '/' + src;
+}

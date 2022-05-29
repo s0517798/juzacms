@@ -35,10 +35,23 @@ trait ResourceController
             ...$params
         );
 
-        return $this->bladeRender(
-            $this->viewPrefix . '.index',
-            $this->getDataForIndex(...$params)
+        $data = $this->getDataForIndex(...$params);
+
+        $builder = new PageBuilder();
+
+        $builder->addRow(
+            function (Row $row) use ($data) {
+                $row->addCol12(
+                    function (Col $col) use ($data) {
+                        $col->addDataTable($data['dataTable']);
+                    }
+                );
+            }
         );
+
+        unset($data['dataTable']);
+
+        return $builder->render($data);
     }
 
     public function create(Request $request, ...$params): JsonResponse|Response
