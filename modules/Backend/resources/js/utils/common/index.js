@@ -1,4 +1,4 @@
-export const addScriptJS = (src: string, sync = 0, cdn = 0) => {
+export const addScriptJS = (src, sync = 0, cdn = 0) => {
     const script = document.createElement('script');
     if (cdn !== 0) {
       script.src = src;

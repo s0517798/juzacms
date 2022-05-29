@@ -12,10 +12,10 @@ export default function Backend({ children }) {
     }, [])
 
     return (
-        <>
-        <Head>
-            <title>{title}</title>
-        </Head>
+        <React.Fragment>
+            <Head>
+                <title>{title}</title>
+            </Head>
 
         <div className="juzaweb__layout juzaweb__layout--hasSider">
             <div className="juzaweb__menuLeft">
@@ -93,6 +93,6 @@ export default function Backend({ children }) {
                 </div>
             </div>
         </div>
-        </>
+        </React.Fragment>
     )
 }

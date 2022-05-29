@@ -1,5 +1,5 @@
-import React, {useEffect, useState} from 'react'
-import {usePage, Link} from '@inertiajs/inertia-react'
+import React from 'react'
+import {usePage} from '@inertiajs/inertia-react'
 import Layout from '@/layouts/Backend'
 import { JW_Field } from '@/components/atoms'
 

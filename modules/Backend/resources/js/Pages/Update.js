@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import Layout from '../layouts/Backend'
+import axios from "axios";
 
 const Update = () => {
     const [analytics, setAnalytics] = useState({
