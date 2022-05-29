@@ -66,7 +66,7 @@ export const JW_DataTable = ({data = {
                     <thead>
                         <tr>
                             <th
-                                data-width="3%"
+                                style={{width: '3%'}}
                                 data-checkbox="true">
                                 <input type="checkbox" className='check-all' />
                             </th>
@@ -75,8 +75,8 @@ export const JW_DataTable = ({data = {
                                     return (
                                         <React.Fragment key={index}>
                                             <th
-                                                data-width={item.width}
-                                                data-align={item.align || 'left'}
+                                                style={{width: item.width}}
+                                                align={item.align || 'left'}
                                                 data-field={item.key}
                                                 data-sortable={item.sortable || true}
                                             >
