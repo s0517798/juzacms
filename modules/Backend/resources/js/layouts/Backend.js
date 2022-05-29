@@ -1,16 +1,22 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import MenuTop from '../components/MenuTop'
 import MenuLeft from '../components/MenuLeft'
 import { usePage, Head, Link } from '@inertiajs/inertia-react'
+//import {addScriptJS} from "@/utils/common";
 
 export default function Backend({ children }) {
     const { title } = usePage().props
+
+    useEffect(() => {
+        //addScriptJS('/jw-styles/juzaweb/tinymce/tinymce.min.js')
+    }, [])
 
     return (
         <>
         <Head>
             <title>{title}</title>
         </Head>
+
         <div className="juzaweb__layout juzaweb__layout--hasSider">
             <div className="juzaweb__menuLeft">
                 <div className="juzaweb__menuLeft__mobileTrigger"><span></span></div>
